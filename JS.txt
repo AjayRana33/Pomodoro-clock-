@@ -1,0 +1,72 @@
+function pad(d) {
+    return (d < 10) ? '0' + d.toString() : d.toString();
+}
+function convertsec(s){
+  var min = Math.floor(s/60);
+  var sec = s%60;
+  return (pad(min)+':'+pad(sec));
+}
+
+
+$(document).ready(function() {
+  var counter=0;
+  var counter1=0;
+  $('#start').on('click', function () {
+      counter = 0;
+      counter1 = 0;
+      var session_time = document.getElementById("searchs").value;
+      var break_time = document.getElementById("searchb").value;
+      
+      var session = document.getElementById("session");
+      var brk = document.getElementById("break");
+      brk.innerHTML = convertsec(break_time);
+      session.innerHTML = convertsec(session_time-counter);
+      var interval = setInterval(timeit,1000);
+      function timeit(){
+      counter++;
+        console.log("COUNTER =",counter);
+      session.innerHTML = convertsec(session_time-counter);
+      if (counter >= session_time){
+        clearInterval(interval);
+        session.innerHTML = "00:00";
+       
+        
+      brk.innerHTML = convertsec(break_time-counter1);
+      var interval2 = setInterval(timeit2,1000);
+      function timeit2(){
+      counter1++;
+        console.log("COUNTER-1 =",counter1);
+      brk.innerHTML = convertsec(break_time-counter1);
+      if (counter1 >= break_time){
+        clearInterval(interval2);
+        brk.innerHTML = "00:00";
+      }
+    }
+        
+      }
+    }
+    
+    
+    
+  });
+  
+  $('#reset').on('click', function () {
+    console.log(counter);
+    var session = document.getElementById("session");
+    var brk = document.getElementById("break");
+    var session_time = document.getElementById("searchs");
+    var break_time = document.getElementById("searchb");
+    
+    session.innerHTML = "00:00";
+    brk.innerHTML = "00:00";
+    console.log(session_time);
+    session_time.innerHTML=00;
+    console.log(session_time);
+    break_time.innerHTML=00;
+    counter=session_time.value;
+    counter1=break_time.value;
+    
+  });
+                 
+  
+});
