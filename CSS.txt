@@ -1,0 +1,25 @@
+body{
+  background:#1d1d1d;
+  color:#e74c3c;
+}
+.container{
+  margin:0px auto;
+}
+#idk{
+  margin-top:20px;
+}
+.form-control{
+  margin-top:20px;
+}
+
+.lol{
+  margin-top:20px;
+}
+#session{
+  color:#3498db;
+  font-size:42px;
+}
+#break{
+  color:#2ecc71;
+  font-size:42px;
+}
