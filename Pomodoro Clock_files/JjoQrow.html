@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://cdpn.io/AjayRana/fullpage/JjoQrow -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link rel="apple-touch-icon" type="image/png" href="https://static.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://static.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+<link rel="mask-icon" type="" href="https://static.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+<title>CodePen - Pomodoro Clock</title>
+<link rel="stylesheet" href="./bootstrap.min.css">
+<style>
+body{
+  background:#1d1d1d;
+  color:#e74c3c;
+}
+.container{
+  margin:0px auto;
+}
+#idk{
+  margin-top:20px;
+}
+.form-control{
+  margin-top:20px;
+}
+
+.lol{
+  margin-top:20px;
+}
+#session{
+  color:#3498db;
+  font-size:42px;
+}
+#break{
+  color:#2ecc71;
+  font-size:42px;
+}
+</style>
+<script>
+  window.console = window.console || function(t) {};
+</script>
+<script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+</head>
+<body translate="no">
+<div id="idk" class="container">
+<div class="rows">
+<div class="col-md-3">
+<h2>Session Time</h2>
+</div>
+<div class="col-md-2">
+<input type="text" class="form-control" id="searchs" placeholder="in seconds">
+</div>
+<div class="col-md-2">
+<h2>Break Time</h2>
+</div>
+<div class="col-md-2">
+<input type="text" class="form-control" id="searchb" placeholder="in seconds">
+</div>
+<div class="col-md-1">
+<button class="btn btn-primary lol" id="start">Start</button>
+</div>
+<div class="col-md-1">
+<button class="btn btn-danger lol" id="reset">Reset</button>
+</div>
+</div>
+<div class="rows">
+<div class="col-md-6">
+<h3 id="session">00:00</h3>
+</div>
+<div class="col-md-6">
+<h3 id="break">00:00</h3>
+</div>
+</div>
+</div>
+<script src="./stopExecutionOnTimeout-9bf952ccbbd13c245169a0a1190323a27ce073a3d304b8c0fdf421ab22794a58.js.download"></script>
+<script src="./jquery.min.js.download"></script>
+<script id="rendered-js">
+function pad(d) {
+  return d < 10 ? '0' + d.toString() : d.toString();
+}
+function convertsec(s) {
+  var min = Math.floor(s / 60);
+  var sec = s % 60;
+  return pad(min) + ':' + pad(sec);
+}
+
+
+$(document).ready(function () {
+  var counter = 0;
+  var counter1 = 0;
+  $('#start').on('click', function () {
+    counter = 0;
+    counter1 = 0;
+    var session_time = document.getElementById("searchs").value;
+    var break_time = document.getElementById("searchb").value;
+
+    var session = document.getElementById("session");
+    var brk = document.getElementById("break");
+    brk.innerHTML = convertsec(break_time);
+    session.innerHTML = convertsec(session_time - counter);
+    var interval = setInterval(timeit, 1000);
+    function timeit() {
+      counter++;
+      console.log("COUNTER =", counter);
+      session.innerHTML = convertsec(session_time - counter);
+      if (counter >= session_time) {
+        clearInterval(interval);
+        session.innerHTML = "00:00";
+
+
+        brk.innerHTML = convertsec(break_time - counter1);
+        var interval2 = setInterval(timeit2, 1000);
+        function timeit2() {
+          counter1++;
+          console.log("COUNTER-1 =", counter1);
+          brk.innerHTML = convertsec(break_time - counter1);
+          if (counter1 >= break_time) {
+            clearInterval(interval2);
+            brk.innerHTML = "00:00";
+          }
+        }
+
+      }
+    }
+
+
+
+  });
+
+  $('#reset').on('click', function () {
+    console.log(counter);
+    var session = document.getElementById("session");
+    var brk = document.getElementById("break");
+    var session_time = document.getElementById("searchs");
+    var break_time = document.getElementById("searchb");
+
+    session.innerHTML = "00:00";
+    brk.innerHTML = "00:00";
+    console.log(session_time);
+    session_time.innerHTML = 00;
+    console.log(session_time);
+    break_time.innerHTML = 00;
+    counter = session_time.value;
+    counter1 = break_time.value;
+
+  });
+
+
+});
+//# sourceURL=pen.js
+    </script>
+
+
+</body></html>
